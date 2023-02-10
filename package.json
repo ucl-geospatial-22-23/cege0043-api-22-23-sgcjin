@@ -1,0 +1,22 @@
+{
+  "name": "cege0043-api-22-23-sgcjin",
+  "version": "1.0.0",
+  "description": "Empty template for the CEGE0043 API",
+  "main": "dataAPI.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/ucl-geospatial-22-23/cege0043-api-22-23-sgcjin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ucl-geospatial-22-23/cege0043-api-22-23-sgcjin/issues"
+  },
+  "homepage": "https://github.com/ucl-geospatial-22-23/cege0043-api-22-23-sgcjin#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
