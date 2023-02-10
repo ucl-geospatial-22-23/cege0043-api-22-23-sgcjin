@@ -28,3 +28,6 @@ const express = require('express');
  });
  
  module.exports = geoJSON;
+ 
+ const geoJSON = require('./routes/geoJSON');
+app.use('/geojson', geoJSON);
