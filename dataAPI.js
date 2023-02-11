@@ -26,5 +26,7 @@ app.use(function (req, res, next) {
 let filename = path.basename(req.url);
 let extension = path.extname(filename);
 console.log("The file " + filename + " was requested.");
+
 next();
 });
+
