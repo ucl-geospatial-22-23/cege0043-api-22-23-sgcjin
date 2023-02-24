@@ -26,6 +26,8 @@ const express = require('express');
  res.json({message:req.originalUrl});
  });
 
+
+// ----------------------------------------------------
  geoJSON.get('/postgistest', function (req,res) {
  pool.connect(function(err,client,done) {
  if(err){
@@ -43,5 +45,26 @@ const express = require('express');
  });
  });
 
+geoJSON.get('/getSensors', function (req,res) {
+ pool.connect(function(err,client,done) {
+ if(err){
+ console.log("not able to get connection "+ err);
+ res.status(400).send(err);
+ }
+ let querystring = " SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features FROM ";
+ querystring = querystring + "(SELECT 'Feature' As type , ST_AsGeoJSON(st_transform(lg.location,4326))::json As geometry, ";
+ querystring = querystring + "row_to_json((SELECT l FROM (SELECT sensor_id, sensor_name, sensor_make, sensor_installation_date, room_id) As l)) As properties";
+ querystring = querystring + " FROM ucfscde.temperature_sensors As lg limit 100 ) As f";
+
+ client.query(querystring,function(err,result) {
+ done();
+ if(err){
+ console.log(err);
+res.status(400).send(err);
+ }
+ res.status(200).send(result.rows);
+ });
+ });
+ });
 
 module.exports = geoJSON;
