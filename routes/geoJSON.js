@@ -8,12 +8,10 @@ const express = require('express');
  const os = require('os');
  const userInfo = os.userInfo();
  const username = userInfo.username;
- console.log(username);
-  
+ 
+  console.log(username);
  // locate the database login details
  const configtext = ""+fs.readFileSync("/home/"+username+"/certs/postGISConnection.js");
-  console.log(configtext);
-  
  // now convert the configuration file into the correct format -i.e. a name/value pair array
  const configarray = configtext.split(",");
  let config = {};
@@ -24,12 +22,26 @@ const express = require('express');
  const pool = new pg.Pool(config);
  console.log(config);
  
- // test the route
  geoJSON.route('/testGeoJSON').get(function (req,res) {
  res.json({message:req.originalUrl});
  });
 
- module.exports = geoJSON;
- 
- const geoJSON = require('./routes/geoJSON');
-app.use('/geojson', geoJSON);
+ geoJSON.get('/postgistest', function (req,res) {
+ pool.connect(function(err,client,done) {
+ if(err){
+ console.log("not able to get connection "+ err);
+ res.status(400).send(err);
+ }
+ client.query(' select * from information_schema.columns' ,function(err,result) {
+ done();
+ if(err){
+ console.log(err);
+ res.status(400).send(err);
+ }
+ res.status(200).send(result.rows);
+ });
+ });
+ });
+
+
+module.exports = geoJSON;
