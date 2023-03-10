@@ -13,11 +13,11 @@ app.get('/',function (req,res) {
 res.send("hello world from the Data API ");
 });
 
-// adding functionality to allow cross-origin queries
+// CORS setup: adding functionality to allow cross-origin queries
 app.use(function(req, res, next) {
 res.setHeader("Access-Control-Allow-Origin", "*");
-res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
-res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 next();
 });
 
@@ -32,3 +32,6 @@ next();
 
 const geoJSON = require('./routes/geoJSON');
 app.use('/geojson', geoJSON);
+
+const crud = require('./routes/crud');
+app.use('/', crud);
