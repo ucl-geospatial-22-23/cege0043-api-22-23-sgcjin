@@ -36,5 +36,43 @@ crud.use(bodyParser.urlencoded({ extended: true }));
  });
  
  
+// get user ids
+
+crud.get('/userId', function (req,res) {
+	pool.connect(function(err,client,done) {
+		if(err){
+               console.log("not able to get connection "+ err);
+               res.status(400).send(err);
+           } 
+		let querystring = "select user_id from ucfscde.users where user_name = current_user;";
+		// query user id
+		client.query(querystring ,function(err,result) {
+               done(); 
+               if(err){
+                   console.log(err);
+                   res.status(400).send(err);
+               }
+               res.status(200).send(result.rows);
+           });
+		   
+	});// end of pool
+});// end of user id func
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
  module.exports = crud;
