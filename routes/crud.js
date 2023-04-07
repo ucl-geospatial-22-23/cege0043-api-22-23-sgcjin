@@ -36,7 +36,7 @@ crud.use(bodyParser.urlencoded({ extended: true }));
  });
  
  
-// get user ids
+// A0 get user ids
 
 crud.get('/userId', function (req,res) {
 	pool.connect(function(err,client,done) {
@@ -58,7 +58,7 @@ crud.get('/userId', function (req,res) {
 	});// end of pool
 });// end of func
 	
-// Get the condition status list
+// A1 Get the condition status list
 crud.get('/conditionDetails', function (req,res) {
 	pool.connect(function(err,client,done) {
 		if(err){
@@ -78,8 +78,37 @@ crud.get('/conditionDetails', function (req,res) {
 		   
 	});// end of pool
 });// end of func
-	
 
+// A1 insert asset point
+crud.post('/insertAssetPoint',function(req,res){
+
+    pool.connect(function(err,client,done) {
+        if(err){
+            console.log("not able to get connection "+ err);
+            res.status(400).send(err);
+        }
+
+		// get parameters
+        let asset_name =  req.body.asset_name ;
+        let installation_date =  req.body.installation_date ;
+
+        var geometrystring = "st_geomfromtext('POINT("+req.body.longitude+ " "+req.body.latitude +")',4326)";
+		var querystring = "INSERT into cege0043.asset_information (asset_name,installation_date, location) values ";
+		querystring += "($1,$2,";
+		querystring += geometrystring + ")";
+
+
+        client.query(querystring, [asset_name,installation_date],function(err,result) {
+                done();
+                if(err){
+                   console.log(err);
+                   res.status(400).send(err);
+               }
+               res.status(200).send("Form Data "+ req.body.asset_name+ " has been inserted");
+           }); // end of query
+
+    }); // end of pool
+}); // end of func
 
 
 
