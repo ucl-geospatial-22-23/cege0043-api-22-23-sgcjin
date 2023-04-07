@@ -53,12 +53,31 @@ crud.get('/userId', function (req,res) {
                    res.status(400).send(err);
                }
                res.status(200).send(result.rows);
-           });
+           }); // end of query
 		   
 	});// end of pool
-});// end of user id func
+});// end of func
 	
-	
+// Get the condition status list
+crud.get('/conditionDetails', function (req,res) {
+	pool.connect(function(err,client,done) {
+		if(err){
+               console.log("not able to get connection "+ err);
+               res.status(400).send(err);
+           } 
+		let querystring = "select * from cege0043.asset_condition_options;";
+		// query user id
+		client.query(querystring ,function(err,result) {
+               done(); 
+               if(err){
+                   console.log(err);
+                   res.status(400).send(err);
+               }
+               res.status(200).send(result.rows);
+           }); // end of query
+		   
+	});// end of pool
+});// end of func
 	
 
 
