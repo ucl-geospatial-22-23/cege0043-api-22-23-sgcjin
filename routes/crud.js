@@ -291,8 +291,28 @@ crud.get('/userFiveClosestAssets/:latitude/:longitude', function (req,res) {
 	});// end of pool
 });// end of func
 
+// S3: showing the last 5 reports that the user created
+crud.get('/lastFiveConditionReports/:user_id', function (req,res) {
+	pool.connect(function(err,client,done) {
+		if(err){
+               console.log("not able to get connection "+ err);
+               res.status(400).send(err);
+           } 
+		var user_id = req.params.user_id;
 
+	var querystring = "SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features FROM (SELECT 'Feature' As type , ST_AsGeoJSON(lg.location)::json As geometry, row_to_json((SELECT l FROM (SELECT id,user_id, asset_name, condition_description ) As l )) As properties FROM (select * from cege0043.condition_reports_with_text_descriptions where user_id = $1 order by timestamp desc limit 5) as lg) As f"		
 
+		client.query(querystring,[user_id],function(err,result) {
+               done(); 
+               if(err){
+                   console.log(err);
+                   res.status(400).send(err);
+               }
+				res.status(200).send(result.rows);
+           }); // end of query
+		   
+	});// end of pool
+});// end of func
 
 
 
