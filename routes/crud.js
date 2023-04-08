@@ -140,7 +140,44 @@ crud.post('/insertConditionInformation',function(req,res){
 }); // end of func
 
 
+// A2 get only the geoJSON asset locations for a specific user_id
 
+crud.get('/userAssets/:user_id', function (req,res) {
+	pool.connect(function(err,client,done) {
+		if(err){
+               console.log("not able to get connection "+ err);
+               res.status(400).send(err);
+           } 
+		var colnames = "asset_id, asset_name, installation_date, latest_condition_report_date, condition_description";  
+		var user_id = req.params.user_id;
+		console.log(user_id);
+	
+
+	var querystring = "SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features  FROM ";
+	querystring += "(SELECT 'Feature' As type, ST_AsGeoJSON(lg.location)::json As geometry, ";
+	querystring += "row_to_json((SELECT l FROM (SELECT "+colnames+") As l)) As properties ";
+	querystring += "FROM cege0043.asset_with_latest_condition As lg ";
+	querystring += "WHERE user_id = $1 limit 100) As f ";
+		console.log(querystring);
+		
+
+		client.query(querystring,[user_id],function(err,result) {
+               done(); 
+               if(err){
+                   console.log(err);
+                   res.status(400).send(err);
+               }
+			   console.log(result.rows);
+               let geoJSONData = JSON.stringify(result.rows);
+				// the data from PostGIS is surrounded by [ ] which doesn't work in QGIS, so remove
+				geoJSONData = geoJSONData.substring(1); 
+				geoJSONData = geoJSONData.substring(0, geoJSONData.length - 1);         
+				console.log(geoJSONData);
+				res.status(200).send(JSON.parse(geoJSONData));
+           }); // end of query
+		   
+	});// end of pool
+});// end of func
 
 
 
