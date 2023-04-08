@@ -246,5 +246,26 @@ crud.get('/assetsInGreatCondition', function (req,res) {
 	});// end of pool
 });// end of func
 
- 
+// L2: daily reporting rates for the past week
+crud.get('/dailyParticipationRates', function (req,res) {
+	pool.connect(function(err,client,done) {
+		if(err){
+               console.log("not able to get connection "+ err);
+               res.status(400).send(err);
+           } 
+		let querystring = "select  array_to_json (array_agg(c)) from (select day, sum(reports_submitted) as reports_submitted, sum(not_working) as reports_not_working from cege0043.report_summary group by day) c ";
+		// query user id
+		client.query(querystring ,function(err,result) {
+               done(); 
+               if(err){
+                   console.log(err);
+                   res.status(400).send(err);
+               }
+               res.status(200).send(result.rows);
+           }); // end of query
+		   
+	});// end of pool
+});// end of func
+
+
  module.exports = crud;
