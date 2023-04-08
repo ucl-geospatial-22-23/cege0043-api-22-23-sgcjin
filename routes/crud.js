@@ -150,7 +150,6 @@ crud.get('/userAssets/:user_id', function (req,res) {
            } 
 		var colnames = "asset_id, asset_name, installation_date, latest_condition_report_date, condition_description";  
 		var user_id = req.params.user_id;
-		console.log(user_id);
 	
 
 	var querystring = "SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features  FROM ";
@@ -158,7 +157,6 @@ crud.get('/userAssets/:user_id', function (req,res) {
 	querystring += "row_to_json((SELECT l FROM (SELECT "+colnames+") As l)) As properties ";
 	querystring += "FROM cege0043.asset_with_latest_condition As lg ";
 	querystring += "WHERE user_id = $1 limit 100) As f ";
-		console.log(querystring);
 		
 
 		client.query(querystring,[user_id],function(err,result) {
@@ -188,8 +186,6 @@ crud.get('/userConditionReports/:user_id', function (req,res) {
                res.status(400).send(err);
            } 
 		var user_id = req.params.user_id;
-		console.log(user_id);
-	
 
 	var querystring = "select array_to_json (array_agg(c)) from (SELECT COUNT(*) AS num_reports from cege0043.asset_condition_information where user_id = $1) c;"		
 
@@ -229,6 +225,26 @@ crud.get('/userRanking/:user_id', function (req,res) {
 	});// end of pool
 });// end of func
 
+// L1: list of all the assets with at least one report saying that they are in the best condition
+crud.get('/assetsInGreatCondition', function (req,res) {
+	pool.connect(function(err,client,done) {
+		if(err){
+               console.log("not able to get connection "+ err);
+               res.status(400).send(err);
+           } 
+		let querystring = "select array_to_json (array_agg(d)) from (select c.* from cege0043.asset_information c inner join  (select count(*) as best_condition, asset_id from cege0043.asset_condition_information where condition_id in (select id from cege0043.asset_condition_options where condition_description like '%very good%') group by asset_id order by best_condition desc) b on b.asset_id = c.id) d;";
+		// query user id
+		client.query(querystring ,function(err,result) {
+               done(); 
+               if(err){
+                   console.log(err);
+                   res.status(400).send(err);
+               }
+               res.status(200).send(result.rows);
+           }); // end of query
+		   
+	});// end of pool
+});// end of func
 
  
  module.exports = crud;
