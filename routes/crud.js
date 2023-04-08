@@ -206,17 +206,16 @@ crud.get('/userConditionReports/:user_id', function (req,res) {
 });// end of func
 
 // S1: user is given their ranking 
-crud.get('/userConditionReports/:user_id', function (req,res) {
+crud.get('/userRanking/:user_id', function (req,res) {
 	pool.connect(function(err,client,done) {
 		if(err){
                console.log("not able to get connection "+ err);
                res.status(400).send(err);
            } 
 		var user_id = req.params.user_id;
-		console.log(user_id);
 	
 
-	var querystring = "select array_to_json (array_agg(c)) from (SELECT COUNT(*) AS num_reports from cege0043.asset_condition_information where user_id = $1) c;"		
+	var querystring = "select array_to_json (array_agg(hh)) from (select c.rank from (SELECT b.user_id, rank()over (order by num_reports desc) as rank from (select COUNT(*) AS num_reports, user_id from cege0043.asset_condition_information group by user_id) b) c where c.user_id = $1) hh;"		
 
 		client.query(querystring,[user_id],function(err,result) {
                done(); 
