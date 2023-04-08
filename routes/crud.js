@@ -267,5 +267,33 @@ crud.get('/dailyParticipationRates', function (req,res) {
 	});// end of pool
 });// end of func
 
+// S2: showing the 5 assets closest to the user’s current location, added by any user
+crud.get('/userFiveClosestAssets/:latitude/:longitude', function (req,res) {
+	pool.connect(function(err,client,done) {
+		if(err){
+               console.log("not able to get connection "+ err);
+               res.status(400).send(err);
+           } 
+	var latitude = req.params.latitude;
+	var longitude = req.params.longitude;
+
+	var querystring = "SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features FROM (SELECT 'Feature' As type , ST_AsGeoJSON(lg.location)::json As geometry, row_to_json((SELECT l FROM (SELECT id, asset_name, installation_date) As l )) As properties FROM (select c.* from cege0043.asset_information c inner join (select id, st_distance(a.location, st_geomfromtext('POINT("+latitude+" "+longitude+")',4326)) as distance from cege0043.asset_information a order by distance asc limit 5) b on c.id = b.id ) as lg) As f"		
+
+		client.query(querystring,function(err,result) {
+               done(); 
+               if(err){
+                   console.log(err);
+                   res.status(400).send(err);
+               }
+				res.status(200).send(result.rows);
+           }); // end of query
+		   
+	});// end of pool
+});// end of func
+
+
+
+
+
 
  module.exports = crud;
