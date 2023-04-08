@@ -179,12 +179,56 @@ crud.get('/userAssets/:user_id', function (req,res) {
 	});// end of pool
 });// end of func
 
+// A3 user is told how many condition reports they have saved
 
+crud.get('/userConditionReports/:user_id', function (req,res) {
+	pool.connect(function(err,client,done) {
+		if(err){
+               console.log("not able to get connection "+ err);
+               res.status(400).send(err);
+           } 
+		var user_id = req.params.user_id;
+		console.log(user_id);
+	
 
+	var querystring = "select array_to_json (array_agg(c)) from (SELECT COUNT(*) AS num_reports from cege0043.asset_condition_information where user_id = $1) c;"		
 
+		client.query(querystring,[user_id],function(err,result) {
+               done(); 
+               if(err){
+                   console.log(err);
+                   res.status(400).send(err);
+               }
+				res.status(200).send(result.rows);
+           }); // end of query
+		   
+	});// end of pool
+});// end of func
 
+// S1: user is given their ranking 
+crud.get('/userConditionReports/:user_id', function (req,res) {
+	pool.connect(function(err,client,done) {
+		if(err){
+               console.log("not able to get connection "+ err);
+               res.status(400).send(err);
+           } 
+		var user_id = req.params.user_id;
+		console.log(user_id);
+	
 
+	var querystring = "select array_to_json (array_agg(c)) from (SELECT COUNT(*) AS num_reports from cege0043.asset_condition_information where user_id = $1) c;"		
 
+		client.query(querystring,[user_id],function(err,result) {
+               done(); 
+               if(err){
+                   console.log(err);
+                   res.status(400).send(err);
+               }
+				res.status(200).send(result.rows);
+           }); // end of query
+		   
+	});// end of pool
+});// end of func
 
 
  
