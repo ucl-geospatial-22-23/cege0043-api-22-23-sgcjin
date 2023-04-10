@@ -86,7 +86,7 @@ crud.post('/insertAssetPoint',function(req,res){
                    console.log(err);
                    res.status(400).send(err);
                }
-               res.status(200).send("Asset Data "+ req.body.asset_name+ " has been successfully inserted");
+               res.status(200).send("Asset Data "+ req.body.asset_name+ " has been successfully inserted.");
            }); // end of query
 
     }); // end of pool
@@ -115,7 +115,7 @@ crud.post('/insertConditionInformation',function(req,res){
                    console.log(err);
                    res.status(400).send(err);
                }
-               res.status(200).send("Condition reports for "+ req.body.asset_name+ " has been successfully inserted");
+               res.status(200).send("Condition reports for "+ req.body.asset_name+ " has been successfully inserted.");
            }); // end of query
 
     }); // end of pool
