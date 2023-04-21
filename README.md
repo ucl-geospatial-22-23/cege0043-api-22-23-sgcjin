@@ -1,14 +1,19 @@
 # cege0043-api-22-23-sgcjin
 This data API is a NodeJS RESTful Data API that saves the assets and conditions to a PostgreSQL database and serves the information about the assets. By using this API, users can do the following:
-1. Insert a new asset with its location and installation date.
-2. Generate lists of assets with locations and details.
-3. Store condition reports of the assets.
+
+* Insert a new asset with its location and installation date.
+
+* Generate lists of assets with locations and details.
+
+* Store condition reports of the assets.
 
 # System Requirements
 * In order to run this API, a Linux (Rocky 9) server is required. We suggest that you use Cyberduck software to use SSH to connect to the server.
+
 * If you are going to use this API outside the UCL campus (not connected to Eduroam), make
 sure you are connected to UCL VPN by following the instructions
 at https://www.ucl.ac.uk/isd/services/get-connected/remote-working-services/ucl-virtualprivate-network-vpn.
+
 * In order to test the endpoints for POST in this API, [Postman](https://www.postman.com/) is required to be installed.
 
 # Procedures to deploy this API:
@@ -68,26 +73,26 @@ node dataAPI.js
 
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/conditionDetails
 
-* https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/:user_id
+* https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/:user_id <br>
 Please replace `:user_id` with a valid `user_id` from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example:  https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/606.
 
-* https://cege0043-7.cs.ucl.ac.uk/api/geojson/userConditionReports/:user_id
+* https://cege0043-7.cs.ucl.ac.uk/api/geojson/userConditionReports/:user_id <br>
 Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/userConditionReports/606.
 
-* https://cege0043-7.cs.ucl.ac.uk/api/geojson/userRanking/:user_id
+* https://cege0043-7.cs.ucl.ac.uk/api/geojson/userRanking/:user_id <br>
 Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/userRanking/606.
 
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/assetsInGreatCondition
 
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/dailyParticipationRates
 
-* https://cege0043-7.cs.ucl.ac.uk/api/geojson/userFiveClosestAssets/:latitude/:longitude
+* https://cege0043-7.cs.ucl.ac.uk/api/geojson/userFiveClosestAssets/:latitude/:longitude <br>
 Please replace `:latitude/:longitude` with valid latitude and longitude. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/userFiveClosestAssets/51.507351/-0.127758.
 
-* https://cege0043-7.cs.ucl.ac.uk/api/geojson/lastFiveConditionReports/:user_id
+* https://cege0043-7.cs.ucl.ac.uk/api/geojson/lastFiveConditionReports/:user_id <br>
 Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/lastFiveConditionReports/606.
 
-* https://cege0043-7.cs.ucl.ac.uk/api/geojson/conditionReportMissing/:user_id
+* https://cege0043-7.cs.ucl.ac.uk/api/geojson/conditionReportMissing/:user_id <br>
 Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/conditionReportMissing/606.
 
 5. To test the availability of endpoints for POST request, in the Postman create a new workspace:
@@ -99,16 +104,16 @@ Please replace `:user_id` with a valid user id from the GET result of https://ce
 7. Set the request to POST by clicking on `POST`, then open `Body` and set the parameters as `x-www-form-unencoded`.
 ![alt text](readme_img/testing.jpg)
 
-8. Type in the url and key-value pairs under the Body to test the POST endpoints as follows:
+8. Type in the url and key-value pairs under the Body to test the POST endpoints as follows: <br>
 (In this case we will use `https://cege0043-7.cs.ucl.ac.uk` as an example of the server address. Please replace `https://cege0043-7.cs.ucl.ac.uk` with your server address.) 
 
-* https://cege0043-7.cs.ucl.ac.uk/api/insertConditionInformation
-Key: asset_name, condition_description
+* https://cege0043-7.cs.ucl.ac.uk/api/insertConditionInformation <br>
+Key: asset_name, condition_description <br>
 Please replace the `Value` part with your existing asset details. Here is an example of successful testing:
 ![alt text](readme_img/condition_res.jpg)
 
-* https://cege0043-7.cs.ucl.ac.uk/api/insertAssetPoint
-Key: asset_name, installation_date, longitude, latitude
+* https://cege0043-7.cs.ucl.ac.uk/api/insertAssetPoint <br>
+Key: asset_name, installation_date, longitude, latitude <br>
 Please replace the `Value` part with your asset details. Here is an example of successful testing:
 ![alt text](readme_img/asset_res.jpg)
 (The asset_name needs to be unique in the database, you may want to select a different name for testing.)
