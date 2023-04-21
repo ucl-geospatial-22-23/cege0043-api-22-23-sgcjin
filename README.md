@@ -63,19 +63,19 @@ node dataAPI.js
 * https://cege0043-7.cs.ucl.ac.uk/api/userId
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/conditionDetails
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/:user_id
-Please replace `:user_id` with a valid `user_id` from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://your-api-url.com/users/12345.
+Please replace `:user_id` with a valid `user_id` from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example:  https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/606.
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/:user_id
-Please replace `:user_id` with a valid `user_id` from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://your-api-url.com/users/12345.
+Please replace `:user_id` with a valid `user_id` from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/606.
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/userConditionReports/:user_id
-Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://your-api-url.com/users/12345.
+Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/userConditionReports/606.
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/assetsInGreatCondition
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/dailyParticipationRates
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/userFiveClosestAssets/:latitude/:longitude
 Please replace `:latitude/:longitude` with valid latitude and longitude. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/userFiveClosestAssets/51.507351/-0.127758.
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/lastFiveConditionReports/:user_id
-Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://your-api-url.com/users/12345.
+Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/lastFiveConditionReports/606.
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/conditionReportMissing/:user_id
-Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://your-api-url.com/users/12345.
+Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/conditionReportMissing/606.
 
 5. To test the availability of endpoints for POST request, in the Postman create a new workspace:
 ![alt text](readme_img/create_workspace.jpg)
