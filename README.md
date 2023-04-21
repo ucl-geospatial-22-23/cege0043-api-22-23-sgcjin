@@ -56,24 +56,37 @@ node dataAPI.js
 ```
 # Procedures to test this app
 1. Make sure your device is connected to UCL Wifi or UCL VPN.
+
 2. Make sure your Node JS server is active.
+
 3. Make sure you have registered and installed [Postman](https://www.postman.com/) on your device. 
+
 4. In a browser (In this case we use Chrome) open the following addresses to test the availability of endpoints for GET requests:
 (In this case we will use `https://cege0043-7.cs.ucl.ac.uk` as an example of the server address. Please replace `https://cege0043-7.cs.ucl.ac.uk` with your server address) 
+
 * https://cege0043-7.cs.ucl.ac.uk/api/userId
+
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/conditionDetails
+
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/:user_id
 Please replace `:user_id` with a valid `user_id` from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example:  https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/606.
-* https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/:user_id
-Please replace `:user_id` with a valid `user_id` from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/606.
+
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/userConditionReports/:user_id
 Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/userConditionReports/606.
+
+* https://cege0043-7.cs.ucl.ac.uk/api/geojson/userRanking/:user_id
+Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/userRanking/606.
+
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/assetsInGreatCondition
+
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/dailyParticipationRates
+
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/userFiveClosestAssets/:latitude/:longitude
 Please replace `:latitude/:longitude` with valid latitude and longitude. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/userFiveClosestAssets/51.507351/-0.127758.
+
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/lastFiveConditionReports/:user_id
 Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/lastFiveConditionReports/606.
+
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/conditionReportMissing/:user_id
 Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://cege0043-7.cs.ucl.ac.uk/api/geojson/conditionReportMissing/606.
 
