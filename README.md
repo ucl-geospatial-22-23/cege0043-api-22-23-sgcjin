@@ -61,13 +61,11 @@ node dataAPI.js
 4. In a browser (In this case we use Chrome) open the following addresses to test the availability of endpoints for GET requests:
 (In this case we will use `https://cege0043-7.cs.ucl.ac.uk` as an example of the server address. Please replace `https://cege0043-7.cs.ucl.ac.uk` with your server address) 
 * https://cege0043-7.cs.ucl.ac.uk/api/userId
-* https://cege0043-7.cs.ucl.ac.uk/api/conditionDetails
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/conditionDetails
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/:user_id
 Please replace `:user_id` with a valid `user_id` from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://your-api-url.com/users/12345.
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/userAssets/:user_id
 Please replace `:user_id` with a valid `user_id` from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://your-api-url.com/users/12345.
-* https://cege0043-7.cs.ucl.ac.uk/api/geojson/allUserAssets
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/userConditionReports/:user_id
 Please replace `:user_id` with a valid user id from the GET result of https://cege0043-7.cs.ucl.ac.uk/api/userId. For example: https://your-api-url.com/users/12345.
 * https://cege0043-7.cs.ucl.ac.uk/api/geojson/assetsInGreatCondition
@@ -114,7 +112,6 @@ Please replace the `Value` part with your asset details. Here is an example of s
 |geoJSON.get(/userRanking/:user_id,|Get the ranking of the user (based on condition reports, in comparison to all other users).|
 |geoJSON.get(/assetsInGreatCondition,|Get a list of all the assets with at least one report saying that they are in the best condition.|
 | geoJSON.get(/dailyParticipationRates, |Get the daily reporting rates for the past week (how many reports have been submitted, and how many of these had the condition as one of the two 'not working' options). |
-|geoJSON.get(/allUserAssets,|Get all assets added by any user.|
 |geoJSON.get(/userFiveClosestAssets/:latitude/:longitude,|Get the 5 assets closest to the user’s current location, added by any user.|
 |geoJSON.get(/lastFiveConditionReports/:user_id,|Get the last 5 reports that the user created (colour coded depending on the conditition rating).|
 |geoJSON.get(/conditionReportMissing/:user_id,|Get assets that the user hasn’t already given a condition report for in the last 3 days.|
