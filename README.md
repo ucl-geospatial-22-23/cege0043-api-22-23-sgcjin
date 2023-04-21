@@ -123,6 +123,6 @@ Please replace the `Value` part with your asset details. Here is an example of s
 |crud.get(/userId,|Get the user id for current user.|
 |crud.post(/insertAssetPoint/,|Insert an asset.|
 |crud.post(/insertConditionInformation/,|Insert an condition for an exsiting asset.|
-
+* readme_img: This directory conains images for README documentation.
 # Code reference
 * A large proportion of codes (Including README.md) are adapted from the lab notes of [CEGE 0043 Web Mobile and GIS](https://moodle-1819.ucl.ac.uk/course/view.php?id=1330) by Claire Ellul, including dataApi.js, crud.js, and geoJSON.js.
